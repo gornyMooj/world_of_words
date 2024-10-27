@@ -36,7 +36,11 @@ def login_required(f):
 # # ROUTES of the USER AUTHENTICATION
 # add @login_required if needed
 # jq responsible for redirecting when loggingin or signingup
-import user.routes
+
+
+# Import routes and models
+from user import routes, models
+
 
 @app.route('/', methods=('GET', 'POST'))
 def welcomepage():

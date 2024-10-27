@@ -1,8 +1,8 @@
 # the file holds all routes related to the user
 
 from flask import Flask, render_template
-from ..basic import app
-from .models import User
+from basic import app
+from models import User
 
 @app.route('/user/signup', methods=['POST'])
 def signup():

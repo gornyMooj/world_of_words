@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 from bson.objectid import ObjectId
 
-from basic import db
+from ..basic import db
 
 class User:
 

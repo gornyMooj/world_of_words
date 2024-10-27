@@ -1,0 +1,104 @@
+{# home.html #}
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div class="container" style="border-bottom: 1px solid; padding-bottom: 20px;">
+    <h1 style="margin-bottom: 0;">HoME</h1> 
+    <div style="display: flex; justify-content: space-between;">
+      <h3 style="margin-top: 0;">PAGE</h3>
+      <a href="{{url_for('signout')}}" style="text-decoration: none; color: inherit;" id="logout-button">
+        <button type="submit" class="btn secondary button-svg" style="font-size: 120%; font-weight: 600;">
+          logouT
+        </button>
+      </a>
+    </div>
+    
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <a href="{{url_for('new_deck')}}" style="text-decoration: none; color: inherit;">
+            <button type="submit" class="btn secondary button-svg" style="font-size: 120%; font-weight: 600;">
+              NEW DECK
+            </button>
+          </a>
+        </div>
+        <div class="col d-flex justify-content-start">
+          <a href="{{url_for('display_terms')}}" style="text-decoration: none; color: inherit;">
+            <button type="submit" class="btn secondary button-svg" style="font-size: 120%; font-weight: 600;">
+              MY TERMS
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+
+
+
+    
+    
+    <div class="container-wraper" style="padding-top:8px">
+
+    <div class="container">
+        <h2 style="margin-bottom: 0;">YOUr</h2> <h5 style="margin-top: 0;">DEcKS</h5>
+    </div>
+
+    {% if without_decks > 0 %}
+      <div class="container">
+        <span class="deck-card-details deck-card-body">UNASSIGNED TERMS: {{ without_decks }}</span>  
+      </div>
+    {% endif %}
+    
+    {% for deck in decks  %}
+    <br>
+
+      <div class="container deck-card" onclick="window.location.href='{{ url_for('deck_menu', id=deck['_id']) }}';">
+        <div class="row">
+          <div class="col deck-card-header">
+           {{deck.name}}
+          </div>
+        </div>
+        <div class="row deck-card-body">
+            <div class="col">
+                <span class="deck-card-details">
+                    ADDED:
+                </span>
+                {{ deck.created_date.strftime('%Y-%m-%d %H:%M') }}
+              </div>
+              <div class="col">
+                <span class="deck-card-details">
+                    No TERMS:
+                </span>
+                {{deck.count}}
+              </div>
+              <div class="col">
+                <span class="deck-card-details">
+                  STUDIED:
+                </span>
+                {{deck.last_stadied.strftime('%Y-%m-%d %H:%M')}}
+              </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+  </div>
+
+  <script>
+    const logoutButton = document.getElementById('logout-button');
+    
+    logoutButton.addEventListener('mouseover', function() {
+        document.body.style.background = 'rgba(85, 85, 85, .12)'; // Change background color on hover
+    });
+
+    logoutButton.addEventListener('mouseout', function() {
+        document.body.style.background = '#ffffff'; // Revert background color on mouse out
+    });
+
+
+</script>
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,49 @@
+{# update-term.html #}
+{% extends 'index.html' %}
+
+{% block content %}
+<br>
+    
+<div class="container-wraper">
+    <div class="container">
+        <div class="container deck-card" style="cursor: context-menu;">
+            <div class="row">
+                <div class="col deck-card-header">
+                    UPDATE TERM
+                </div>
+                <div class="col deck-card-details">
+                    <form method="POST">
+                        <p>
+                            <b><label for="term">Term:</label></b>
+                        </p>
+                        <p>
+                            <textarea name="term" >{{existing_term.term}}</textarea>
+                        </p>
+                        <p>
+                            <b><label for="definition">Definition:</label></b>
+                        </p>
+                        <p>
+                            <textarea name="definition" >{{existing_term.definition}}</textarea>
+                        </p>
+                        <p> 
+                            <button type="submit"> UPDATE </button> &ensp;
+                            <button type="button" onclick="goBack()"> Go BACK.. </button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
+
+
+{% endblock content %}
+

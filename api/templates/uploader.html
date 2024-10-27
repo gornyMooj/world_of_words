@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+<div class="card" style=" margin-left: 10px; width: 80%;">
+    <div class="card-body">
+      <h5 class="card-title">DECK: {{deck_name}}</h5>
+      <p class="card-text">You can upload the csv with your words to this deck. However please note that a cauple of requiremnts must be met:</p>
+      <li class="card-text">CSV files should contain 2 columns named <u>term</u> and <u>definition</u>. It does not matter whether they consist of upper or lower case letters. </li>
+      <li class="card-text">do not upload CSV files containing more than <u>100 rows</u> at a time.</li>
+      <br>
+
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+
+
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input class="form-control" type="file" id="file" name="file" accept=".csv">
+            </div>
+            <input type = "submit" value="Upload" class="btn btn-lg btn-outline-primary">
+        </form>
+
+
+    </div>
+  </div>
+    
+{% endblock content %}
+
+

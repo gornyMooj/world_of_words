@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    <H3>Words BJATCH!!</H3>
+    <h1>Error {{ error_code }}</h1>
+    {% if json_error %}
+        <p>{{ json_error }}</p>
+    {% endif %}
+
+
+    
+{% endblock content %}

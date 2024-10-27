@@ -1,0 +1,27 @@
+{# deck-menu.html #}
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h3 id="add-new-deck">ADD NEW DECK</h3>
+
+    <form id="add-new-deck-form" method="POST">
+        <p>
+            <b><label for="name">Deck Name</label></b>
+        </p>
+        <p>
+            <input id="animate-add-new-deck" type="text" name="name" placeholder="deck name...">
+        </p>
+        <p> 
+        <button id="button-add-new-deck" style="font-size: 120%; font-weight: 600;" type="submit">SubmiT</button>
+    </form>
+
+
+</div>
+    
+    
+
+{% endblock content %}
+

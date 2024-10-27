@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- CUSTOME CSS -->
+     <link rel="stylesheet" href="{{url_for('static', filename='CSS/style.css')}}">
+
+    <title>Document</title>
+</head>
+<body>
+
+
+    {% block authentication_content %}
+        
+    {% endblock authentication_content %}
+
+    
+    <!-- USER AUTHENTICATION -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/scripts.js"></script>
+    
+</body>
+</html>

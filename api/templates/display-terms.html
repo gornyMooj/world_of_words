@@ -1,0 +1,310 @@
+{#display-terms.html#}
+
+{% extends 'index.html' %}
+
+{% block content %}
+    
+    <div class="container">
+        <h2>MY TERMS </h2>
+        <br>
+        
+        <br>
+        <div class="row">
+            <div class="col d-flex align-items-center">
+                <input type="text" id="searchInput" placeholder="Search..." style="width: 156px;">
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="{{ url_for('study', deck_id='none') }}" style="text-decoration: none; color: inherit;">
+                    <button type="submit" class="btn secondary button-svg" style="text-decoration: none;"> STUDY&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                            <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+            <div class="col d-flex align-items-center">
+                <form action="/all-terms" method="POST" id="sort-form-date" >
+                    <input type="hidden" name="data-state" id="date-state-input">
+                    <button type="submit" class="btn secondary button-svg" id="date-sort-button" data-state="INACTIVE" style="text-decoration: none;"> DATE&nbsp;&nbsp;&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            <div class="col d-flex align-items-center">
+                <form action="/all-terms" method="POST" id="sort-form-alp" >
+                    <input type="hidden" name="data-state" id="alp-state-input">
+                    <button type="submit" class="btn secondary button-svg" id="alp-sort-button" data-state="INACTIVE" style="text-decoration: none;"> ABC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+        <br>
+
+        <hr style="margin-left: -10px; margin-right: -10px;">
+    </div>
+    
+    <div id="all-words-wrapper">
+    {% for term in terms  %}
+    <div class="search-class" data-value="{{term.term}}|{{term.definition}}" style="margin-top: 22px;">
+        <div class="container term-container" style="cursor: context-menu;">
+            <div class="row">
+                <div class="col" style="background-color: #f8f8f8;"> <span style="color: #555;">TERM: </span>{{term.term}}</div>
+                <div class="col"><span style="color: #555;">DEFINITION: </span>{{term.definition}}</div>
+            </div>
+            <div class="row">
+                <div class="col" style="background-color: #f8f8f8">
+                    <span class="term-card-details">
+                        ADDED: {{term.added.strftime('%H:%M:%S %d-%m-%Y')}}
+                    </span> 
+                </div>
+                <div class="col button-container">
+                    <!-- if term has no deck -->
+                    {% if term.decks == None %}
+                    <span class="term-card-details span-width-drop">DECK: </span>
+                    <select id="selectBox" name="{{term._id}}" onchange="changeDeck(name)" class="select-width-drop">
+                        <option value="None">undefined</option>
+                        {% for key, value in decks.items() %}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <!-- if term has deck -->
+                    <form method="post">
+                        <span class="term-card-details span-width-drop">DECK: </span>
+                        <select id="selectBox" name="{{term._id}}" onchange="changeDeck(name)" class="select-width-drop">
+                            <option value="{{term.decks}}">{{term.decks_name}}</option>
+                            {% for key, value in decks.items() %}
+                                {% if term.decks_name != value %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </form>
+                    {% endif %} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="background-color: #f8f8f8;">
+                    {% if term.decks == None %}
+                        <form action="{{ url_for('update_term', term_id=term['_id'], id='None') }}">
+                            <button type="submit" class="btn secondary" name="edit_button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    {% else %}
+                        <form action="{{ url_for('update_term', term_id=term['_id'], id=term['decks']) }}">
+                            <button type="submit" class="btn secondary" name="edit_button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="col"> 
+                    <span class="term-card-details span-width-drop">REPEAT: </span>
+                    <select id="selectBoxStatus" name="{{term._id}}" onchange="changeRepeatStatus(this.value, name)" class="select-width-drop">
+                        {% if  term.to_be_repeted == True %}
+                            <option value="{{ term.to_be_repeted }}"> True</option>
+                            <option value="False"> False</option>
+                        {% else %}
+                            <option value="{{ term.to_be_repeted }}"> False</option>
+                            <option value="True"> True</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+
+
+    <script>
+        // getting data from the backend
+        var decks = '{{ decks | tojson }}';
+        var sort = JSON.parse('{{ sort|tojson|safe }}');
+
+        function changeRepeatStatus(selectedStatus, id ) {
+            // triggered when dropdown with statuses changes
+            var data = {term_id: id, 
+                        new_status: selectedStatus
+                }
+            fetch('/update-term-status/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then( response => {
+                if (response.ok) {
+                    console.log('Term Status updated successfully')
+                } else {
+                    console.error('Error updating Term Status');
+                }
+            })
+            .catch(error => {
+                console.error('Network error:', error);
+                // Handle network error here
+            });
+        };
+
+
+        function changeDeck(id) {
+            // triggered when dropdown with decks changes
+            var deck__id = document.getElementById("selectBox").value;
+            var data = {term_id: id, 
+                        deck_id: deck__id
+                };
+
+            fetch('/update-term-deck/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then( response => {
+                if (response.ok) {
+                    console.log('Deck ID updated successfully')
+                } else {
+                    console.error('Error updating Deck ID');
+                }
+            })
+            .catch(error => {
+                console.error('Network error:', error);
+                // Handle network error here
+            });
+        };
+        
+        // ------- uses data-value and class to filter words
+        var search_input = document.getElementById('searchInput');
+        var flashcards_list = document.getElementById('all-words-wrapper');
+        var list_items = flashcards_list.getElementsByClassName('search-class');
+
+
+        search_input.addEventListener('input', function() {
+            
+            var search_term = this.value.toLowerCase();
+            for (var i = 0; i < list_items.length; i++) {
+                var listItem = list_items[i];
+                var textContent = listItem.getAttribute("data-value").toLowerCase();
+                if (textContent.includes(search_term)) {
+                    listItem.style.display = 'block';
+                } else {
+                    listItem.style.display = 'none';
+                }
+            }
+        });
+
+
+        function sort_terms(sort) {
+            // used in the front end; shows selected sorting options 
+            if(sort.includes('ASC')) {
+                if(sort.includes('ADDED')){
+                    // selected ADDED_ASC arrow should be pointed down
+                    document.getElementById("date-sort-button").classList.add('active-sort-svg')
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.add('arrow-down');
+                    document.getElementById("date-sort-button").setAttribute("data-state", "ACTIVE-ASC");
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.remove('inactive-svg');
+                    // alp-sort-button
+                    document.getElementById("alp-sort-button").setAttribute("data-state", "INACTIVE");
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.add('inactive-svg');
+                    document.getElementById("alp-sort-button").classList.remove('active-sort-svg');
+                }
+                if(sort.includes('ALP')){
+                    // selected ALP_ASC arrow should be pointed down
+                    document.getElementById("alp-sort-button").classList.add('active-sort-svg')
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.add('arrow-down');
+                    document.getElementById("alp-sort-button").setAttribute("data-state", "ACTIVE-ASC");
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.remove('inactive-svg');
+                    // date-sort-button
+                    document.getElementById("date-sort-button").setAttribute("data-state", "INACTIVE");
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.add('inactive-svg');
+                    document.getElementById("date-sort-button").classList.remove('active-sort-svg');
+                }
+
+            } else if (sort.includes('DESC')) {
+                if(sort.includes('ADDED')){
+                    // selected ADDED_DESC arrow should be pointed down
+                    document.getElementById("date-sort-button").classList.add('active-sort-svg')
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.remove('arrow-down');
+                    document.getElementById("date-sort-button").setAttribute("data-state", "ACTIVE-DESC");
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.remove('inactive-svg');
+                    // alp-sort-button
+                    document.getElementById("alp-sort-button").setAttribute("data-state", "INACTIVE");
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.add('inactive-svg');
+                    document.getElementById("alp-sort-button").classList.remove('active-sort-svg');
+                }
+                if(sort.includes('ALP')){
+                    // selected ALP_ASC arrow should be pointed down
+                    document.getElementById("alp-sort-button").classList.add('active-sort-svg')
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.remove('arrow-down');
+                    document.getElementById("alp-sort-button").setAttribute("data-state", "ACTIVE-DESC");
+                    document.querySelectorAll('#alp-sort-button > svg')[0].classList.remove('inactive-svg');
+                    // date-sort-button
+                    document.getElementById("date-sort-button").setAttribute("data-state", "INACTIVE");
+                    document.querySelectorAll('#date-sort-button > svg')[0].classList.add('inactive-svg');
+                    document.getElementById("date-sort-button").classList.remove('active-sort-svg');
+                }
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // sets  sort status and styling for default
+            sort_terms(sort)
+            // events to sort by date
+            document.getElementById("date-sort-button").addEventListener("click", function() {
+                var state = document.getElementById("date-sort-button").getAttribute("data-state");
+                if (state === 'ACTIVE-ASC' || state === 'INACTIVE') {
+                    sort = 'ADDED_DESC'
+                    sort_terms(sort);
+                } else {
+                    sort = 'ADDED_ASC'
+                    sort_terms(sort);
+                }
+                // PASS sort to backen
+                document.getElementById('date-state-input').value = sort;
+                document.getElementById('sort-form-date').submit();
+                
+                
+            });
+            // events to sort ALP
+            document.getElementById("alp-sort-button").addEventListener("click", function() {
+                var state = document.getElementById("alp-sort-button").getAttribute("data-state");
+                if (state === 'ACTIVE-ASC' || state === 'INACTIVE') {
+                    sort = 'DESC_ALP'
+                    sort_terms(sort);
+                    
+                } else {
+                    sort = 'ASC_ALP'
+                    sort_terms(sort);
+                }
+                // PASS sort to backen
+                document.getElementById('alp-state-input').value = sort;
+                document.getElementById('sort-form-alp').submit();
+            
+            });
+        });
+
+    </script>
+
+    
+
+{% endblock content %}
+
+

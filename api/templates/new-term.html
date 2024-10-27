@@ -1,0 +1,42 @@
+{# deck-menu.html #}
+{% extends 'index.html' %}
+
+{% block content %}
+    
+
+    <br>
+    
+    <div class="container-wraper">
+        <div class="container">
+            <div class="container deck-card" style="cursor: context-menu;">
+                <div class="row">
+                    <div class="col deck-card-header">
+                        NEW TERM
+                    </div>
+                    <div class="col deck-card-details">
+                        <form method="POST">
+                            <p>
+                                <b><label for="term">Term:</label></b>
+                            </p>
+                            <p>
+                                <textarea name="term" placeholder="text in here.."></textarea>
+                            </p>
+                            <p>
+                                <b><label for="definition">Definition:</label></b>
+                            </p>
+                            <p>
+                                <textarea name="definition" placeholder="text in here.."></textarea>
+                            </p>
+                            <p> 
+                                <button type="submit"> SUBMIT </button> &ensp;
+                                <button type="button" onclick="window.location.href='{{ url_for('deck_menu', id=id) }}';"> Go BACK.. </button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

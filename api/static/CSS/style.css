@@ -1,0 +1,488 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    transition: background 10s ease;
+}
+
+.banner {
+    background-color: #212529;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 40px;
+}
+
+.banner a {
+    color: #ffffff;
+    font-weight: bolder;
+    letter-spacing: 2px;
+   
+}
+
+.flip-text svg {
+    transition: transform 1s;
+    display: inline-block;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+.none-deck {
+    color: pink;
+}
+
+.has-deck {
+    font-weight: 400;
+    font-size: 120%;
+}
+
+.deck-details {
+    font-size: 60%;
+    color: #555;
+}
+
+.deck-card {
+    /* background-color: rgba(0,0,0,.05); */
+    /* border-radius: 5px  !important; */
+    border: 1px solid rgba(0,0,0,.9);
+    padding-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 5px 10px rgba(0,0,0,.125);
+
+}
+.deck-card-header {
+   background-color: rgb(248 248 248);
+   border-bottom: 1px solid rgba(0,0,0,.125);
+   letter-spacing: 2px;
+   font-size: 120%;
+   font-weight: 600;
+   padding-top: 10px;
+}
+
+.header-text {
+    letter-spacing: 2px;
+    font-size: 120%;
+    font-weight: 600;
+}
+
+.deck-card-body {
+    font-size: 70%;
+    padding-top: 10px;
+}
+
+.deck-card-details {
+    font-weight: 600;
+}
+
+.container-wraper {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.term-container {
+    border: 1px solid rgba(0,0,0,.9);
+    padding-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 5px 10px rgba(0,0,0,.125);
+}
+
+.button-container {
+    display: flex;
+    gap: 2px;
+}
+
+.term-card-details {
+    font-size: 60%;
+    color: #555;
+    margin-top: 18px;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.button-svg {
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+}
+
+.active-sort-svg {
+    border: 1px solid rgba(0,0,0,.9);
+    box-shadow: 5px 10px rgba(0,0,0,.125);
+}
+
+.container a {
+    text-decoration: none; 
+    color: inherit;
+}
+
+.container button {
+    text-decoration: underline;
+}
+
+.container button:hover {
+    background-color: #ffffff;
+    border: 1px solid rgba(0,0,0,.9);
+    box-shadow: 5px 10px rgba(0,0,0,.125);
+    text-decoration: none;
+}
+
+.span-width-drop{
+    display: inline-block;
+    width: 40px;
+}
+
+.select-width-drop {
+    display: inline-block;
+    width: 120px;
+}
+
+#selectBoxStatus, #selectBox {
+    font-size: 80%;
+}
+
+.word-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border: 1px solid #212529;
+    top: 40px; /* banners height */
+    bottom: 100px; /* bottomo buttons height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the content horizontally */
+}
+
+
+
+#word-fish {
+    position: absolute;
+    bottom: 50%; /* Align the bottom of word-fish with the vertical middle of the container */
+    transform: translateY(50%); /* Move the element up by 50% of its height to ensure the bottom is centered */
+    font-weight: 600;
+    font-size: 22px;
+    max-width: 300px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the content horizontally */
+}
+
+
+.container-study-directions {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 3;
+}
+
+.directions-study {
+    flex: 1;
+    border: 1px solid #212529;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+#circle-close-button {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background-color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-size: 24px; 
+    font-weight: bold; 
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    border: 2px solid rgba(0,0,0,.9);
+    cursor: pointer;
+    transition    : all 0.2s ease-in-out; 
+    -o-transition       : all 0.2s ease-in-out;
+    -moz-transition     : all 0.2 ease-in-out;
+    -webkit-transition  : all 0.2s ease-in-out;
+    }
+
+#circle-close-button:hover > svg {
+    transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+}
+
+#circle-close-button:hover {
+    border: 1px solid rgba(0,0,0,.9);
+    box-shadow: 5px 10px 8px rgba(0,0,0,.4);
+}
+
+#background-stydy-modal {
+
+    background-color: rgba(0,0,0,.6);
+    z-index: 4;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+#menu-modal-wrapper {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 40px;
+    bottom: 40px;
+    border: 1px solid black;
+    background-color: white;
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    box-shadow: 5px 10px 8px rgba(0,0,0,.4);
+}
+
+#repeat-div-wrapper {
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+    z-index: 3;
+    font-size: 12px;  
+}
+
+.arrow-down {
+    rotate: 180deg;
+}
+.inactive-svg {
+    color: rgba(0,0,0,.125);
+}
+
+.rotate-50 > svg {
+    overflow: hidden;
+    transition-duration: 0.2s;
+    transition-property: transform;
+}
+.rotate-50:hover > svg {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+
+.increase-10 > svg {
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.increase-10:hover > svg {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+}
+
+.container-with-centered  {
+    text-align:center;
+    width:100%;
+}
+.centered-elements {
+    margin:4px;
+    text-align:left;
+    display:inline-block; 
+}
+
+.centered-elements button{
+    font-size: 120%; 
+    font-weight: 600;
+}
+
+@media (max-width: 720px) {
+    .centered-elements button{
+        font-size: 100%;
+        
+    }
+    .centered-elements {
+        display: block;
+    }
+  }
+  
+  /* ADD NEW DECK PAGE */
+  #add-new-deck {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    width: 20px;
+    height: 100px;
+
+    transition:width 3s ease;
+  }
+
+  #add-new-deck-form {
+    border-right: 2px solid;
+    transition: width 3s ease;
+    margin-top: -20px;
+    padding-top: 20px;
+  }
+
+  #add-new-deck:hover {width:100% !important;}
+
+
+  /* when div1 is hovered make div2 something */
+  body:has(#animate-add-new-deck:hover) #add-new-deck {
+    width:100% !important;;
+  }
+
+  body:has(#animate-add-new-deck:hover) #add-new-deck {
+    width:100% !important;
+  }
+ 
+
+  #button-add-new-deck {
+    background-color: #ffffff;
+    margin-top: 14px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-decoration: none;
+    padding-left: 6px;
+  }
+
+  #button-add-new-deck:hover{
+    border: 1px solid rgba(0,0,0,.9);
+    padding-left: 10px;
+  }
+
+  .container input{
+    border-bottom: 1px solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+
+
+  }
+  #add-new-deck-form input {
+    width: 120px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    transition: width 3s ease;
+  }
+  
+
+  #add-new-deck-form input:hover {
+    width: 50%;
+  }
+
+/* WELCOME PAGE PART */
+
+.welcome-container {
+    margin: 0 auto;    /* Auto margins will center it horizontally */
+    border: 3px solid #212529;
+    width: 450px;
+    margin-top: 50px;
+    font-size: 26px;
+    letter-spacing: 3px;
+}
+
+.welcome-container .container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.welcome-container h1,  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+
+.inline-div-left {
+    display: inline-block;
+    width: 150px;
+    font-weight: 600;
+    
+}
+
+.inline-div-right {
+    display: inline-block;
+    width: 200px;
+}
+
+
+.inline-div-right input {
+    font-size: 26px;
+    height: 32px !important;
+    width: 200px  !important;
+  }
+  
+.inline-div-right input:placeholder-shown {
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding-left: 8px;
+  }
+
+.input-submit {
+    text-decoration: none;
+    font-size: 26px;
+    background-color: #ffffff;
+    border-radius: 5px  !important;
+    border: 1px solid rgba(0,0,0,.7) !important;
+    padding: 4px 14px;
+    margin-top: 10px;
+    min-height: 46px;
+}
+
+.input-submit:hover{
+    box-shadow: 5px 10px rgba(0,0,0,.125);
+    font-weight: 600;
+    border: 2px solid rgba(0,0,0,.9) !important;
+}
+
+.rotated-letter {
+    display: inline-block;
+    transform: rotate(30deg);
+
+}
+
+@media only screen and (max-width: 500px) {
+    .welcome-container {
+        width: 100%;
+        font-size: 16px;
+        border: none;
+    }
+
+    body {
+        margin: 0px;
+    }
+    .inline-div-left{
+        width: 30%;
+        margin-top: 10px;
+    }
+    .inline-div-right{
+        width: 50%;
+    }
+
+    .welcome-container h1,  .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .inline-div-right input  {
+        font-size: 16px;
+        height: 18px !important;
+        width: 150px  !important;
+    }
+    .input-submit {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .inline-div-right input:placeholder-shown {
+        font-size: 12px;
+    }
+
+    .welcome-container .container {
+        border-left: 1px solid #212529;
+    }
+    
+}

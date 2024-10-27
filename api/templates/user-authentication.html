@@ -1,0 +1,66 @@
+{% extends 'welcomepage.html' %}
+
+{% block authentication_content %}
+
+<div class ="welcome-container">
+  <h1>Welcom<span class="rotated-letter">e</span>&#160; page</h1>
+  <div class="container">
+    <form name="signup_form">
+
+      <div class="inline-div-left"> 
+        <label for="name">name:</label>
+      </div>
+      <div class="inline-div-right">
+        <input type="text" name="name" class="field" placeholder="your name.." required>
+      </div>
+
+      <div class="inline-div-left"> 
+        <label for="name">email:</label>
+      </div>
+      <div class="inline-div-right">
+        <input type="email" name="email" placeholder="email address.." required>
+      </div>
+
+        <div class="inline-div-left"> 
+          <label for="password">password:</label>
+        </div>
+        <div class="inline-div-right">
+          <input type="password" name="password" class="field" placeholder="password.." required>
+        </div>
+
+        <p class="error error--hidden"></p>
+
+        <input type="submit" value="Sign Up" class="input-submit">
+      
+      </form>
+  </div>
+
+  <div class="container">
+
+      <form name="login_form" style="border-top: 2px solid #212529; padding-top: 16px;">
+        <div class="inline-div-left"> 
+          <label for="email">email:</label>
+        </div>
+        <div class="inline-div-right">
+          <input type="email" name="email" class="field" placeholder="email address.." required>
+        </div>
+
+        <div class="inline-div-left"> 
+          <label for="password">password:</label>
+        </div>
+        <div class="inline-div-right">
+          <input type="password" name="password" class="field" placeholder="password.." required>
+        </div>
+          <p class="error error--hidden"></p>
+      
+          <input type="submit" value="LOG IN" class="input-submit">
+        
+        </form>
+    </div>
+
+  </div>
+  <div class=""> 
+
+  </div>
+
+{% endblock authentication_content %}

@@ -4,3 +4,4 @@ pandas==2.0.3
 flask-session==0.6.0
 numpy==1.26.4
 passlib==1.7.4
+flask-cors==5.0.0

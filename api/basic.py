@@ -39,8 +39,7 @@ def login_required(f):
 
 
 # Import routes and models
-import routes
-
+from .user_module.routes import *
 
 @app.route('/', methods=('GET', 'POST'))
 def welcomepage():

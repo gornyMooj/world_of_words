@@ -18,7 +18,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-app.config['SECRET_KEY']  = os.getenv("SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
+print("SECRET_KEY set to:", app.config['SECRET_KEY'])
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 
 
@@ -38,7 +39,6 @@ def login_required(f):
 # # ROUTES of the USER AUTHENTICATION
 # add @login_required if needed
 # jq responsible for redirecting when loggingin or signingup
-
 
 # Import routes and models
 from .user_module.routes import *

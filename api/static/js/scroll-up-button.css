@@ -1,0 +1,7 @@
+#scroll-upp-button {
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
+    z-index: 999;
+    display: none;
+}

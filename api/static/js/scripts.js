@@ -15,8 +15,7 @@ $("form[name=login_form]").submit(function(e) {
     error: function(resp) {
       // Log the full error response to the console for debugging
       console.error("Error response:", resp);
-      console.error("window.location.href:", window.location.href);
-
+      
       // Check if responseJSON exists and has an error property
       var errorMessage = resp.responseJSON && resp.responseJSON.error ? 
                          resp.responseJSON.error : 

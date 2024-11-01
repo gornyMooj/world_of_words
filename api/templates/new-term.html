@@ -28,8 +28,9 @@
                                 <textarea name="definition" placeholder="text in here.."></textarea>
                             </p>
                             <p> 
-                                <button type="submit"> SUBMIT </button> &ensp;
-                                <button type="button" onclick="window.location.href='{{ url_for('deck_menu', id=id) }}';"> Go BACK.. </button>
+                                <button type="submit" class="btn secondary button-svg"> SUBMIT </button> &ensp;
+                                <br>
+                                <button type="button" class="btn secondary button-svg" onclick="window.location.href='{{ url_for('deck_menu', id=id) }}';"> Go BACK </button>
                             </p>
                         </form>
                     </div>

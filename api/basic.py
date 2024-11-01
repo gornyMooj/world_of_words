@@ -18,9 +18,11 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
-print("SECRET_KEY set to:", app.config['SECRET_KEY'])
-app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+# app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
+# app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+
+app.config['SECRET_KEY'] = 'mysecretkey'
+app.config["MONGO_URI"] = "mongodb://localhost:27017/flask_database"
 
 
 mongo = PyMongo(app)
@@ -373,7 +375,6 @@ def display_terms():
     if request.method == 'POST':
         sort = request.form.get('data-state')
         _, updated_terms = sort_words(updated_terms, 'term_first', sort,'REPEAT_ALL', 'term' )
-        print(sort,updated_terms[0])
         return render_template('display-terms.html', terms=updated_terms, decks=decks, sort=sort)
 
     return render_template('display-terms.html', terms=updated_terms, decks=decks, sort=sort)
@@ -391,7 +392,6 @@ def study(deck_id):
     first = 'term'
 
     try:
-        print(deck_id)
         if deck_id == "none":
             words = db[user_id].find({})
         else:

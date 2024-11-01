@@ -294,16 +294,6 @@ textarea {
     font-size: 120%; 
     font-weight: 600;
 }
-
-@media (max-width: 720px) {
-    .centered-elements button{
-        font-size: 100%;
-        
-    }
-    .centered-elements {
-        display: block;
-    }
-  }
   
   /* ADD NEW DECK PAGE */
   #add-new-deck {
@@ -444,6 +434,21 @@ textarea {
 
 }
 
+
+@media (max-width: 720px) {
+    .centered-elements button{
+        font-size: 100%;
+        
+    }
+    .centered-elements {
+        display: block;
+    }
+
+    .card-text {
+        text-align: justify;
+    }
+  }
+
 @media only screen and (max-width: 500px) {
     .welcome-container {
         width: 100%;
@@ -482,7 +487,7 @@ textarea {
     }
 
     .welcome-container .container {
-        border-left: 1px solid #212529;
+        border-left: 2px solid #212529;
     }
     
 }

@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div class="card" style=" margin-left: 10px; width: 80%;">
+<div class="card" style=" margin-left: 10px; margin-top: 10px;width: 80%;">
     <div class="card-body">
       <h5 class="card-title">DECK: {{deck_name}}</h5>
       <p class="card-text">You can upload the csv with your words to this deck. However please note that a cauple of requiremnts must be met:</p>
@@ -25,13 +25,26 @@
             <div class="mb-3">
                 <input class="form-control" type="file" id="file" name="file" accept=".csv">
             </div>
-            <input type = "submit" value="Upload" class="btn btn-lg btn-outline-primary">
+            <input type = "submit" value="Upload" class="input-submit">
         </form>
 
+                <div style="width: 100%;text-align: right;">
+            <button type="button" class="btn secondary button-svg" onclick="goBack()" style="margin-top: 20px;"> Go BACK </button>
+        </div>
 
     </div>
   </div>
-    
+
+
+  
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+
+    </script>
+  
 {% endblock content %}
 
 

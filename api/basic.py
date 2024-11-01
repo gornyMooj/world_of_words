@@ -18,12 +18,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
-# app.config["MONGO_URI"] = os.getenv("MONGO_URI")
-
-app.config['SECRET_KEY'] = 'mysecretkey'
-app.config["MONGO_URI"] = "mongodb://localhost:27017/flask_database"
-
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key")
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 
 mongo = PyMongo(app)
 db = mongo.db

@@ -4,4 +4,10 @@
     right: 10px;
     z-index: 999;
     display: none;
+    border: none;
+    color: rgba(0, 0, 0, .125);
+}
+
+#scroll-upp-button :hover {
+    color: rgba(0, 0, 0, 1);
 }

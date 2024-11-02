@@ -434,6 +434,14 @@ textarea {
 
 }
 
+#words-count {
+	color: #ffffff;
+	font-size: 8px;
+	position: fixed;
+    top: 24px;
+    right: 8px;
+}
+
 
 @media (max-width: 720px) {
     .centered-elements button{
@@ -487,7 +495,7 @@ textarea {
     }
 
     .welcome-container .container {
-        border-left: 2px solid #212529;
+        border-left: 3px solid #212529;
     }
     
 }

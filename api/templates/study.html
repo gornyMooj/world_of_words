@@ -50,8 +50,8 @@
         </div>
     </div>
     <div id="circle-close-button" onclick="goBack()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-            <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
         </svg>
     </div>
 </div>
@@ -70,6 +70,9 @@
 <div class="container-study-directions">
     <div class="directions-study" id="goLeft" onclick="goLeft()">LEFT</div>
     <div class="directions-study" id="goRight" onclick="goRight()">RIGHT</div>
+</div>
+<div>
+    <span id="words-count">-- / --</span>
 </div>
 
 <script type="text/javascript">
@@ -99,7 +102,8 @@
         if(marker === -1) {
             marker = length - 1
         };
-        displayTerm(words[marker], first)
+        displayTerm(words[marker], first);
+        updateCounter(length);
     };
 
     function goRight() {
@@ -108,7 +112,8 @@
         if(marker === length) {
             marker = 0
         };
-        displayTerm(words[marker], first)
+        displayTerm(words[marker], first);
+        updateCounter(length)
     };
 
     if(Object.keys(words).length > 0){
@@ -157,6 +162,13 @@
             window.history.back();
         };
 
+    function  updateCounter(length) {
+        // shows current location of words in the deck
+        var counter = document.getElementById('words-count');
+        var counter_place = marker + 1; 
+        counter.innerHTML = counter_place + ' / ' + length;
+    };
+
     document.addEventListener("DOMContentLoaded", function() {
         // closes modal
        if(show_study_menu === true) {
@@ -187,6 +199,8 @@
             words[marker].to_be_repeted = isRepeat
             changeRepeatStatus(selectedStatus, words[marker]['_id'] )
         });
+        var length = Object.keys(words).length;
+        updateCounter(length);
 
     });
     

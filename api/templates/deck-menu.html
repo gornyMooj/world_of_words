@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="container">
-        <h3>Deck name: {{deck.name}}</h3>
+        <h3 style="margin-top: 4px;">Deck name: {{deck.name}}</h3>
         <div class="container-with-centered">
             <a class="centered-elements" href="{{ url_for('add_new_term', id=deck['_id']) }}">
                 <button type="submit" class="btn secondary button-svg">

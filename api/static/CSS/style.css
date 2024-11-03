@@ -246,6 +246,15 @@ textarea {
     box-shadow: 5px 10px 8px rgba(0,0,0,.4);
 }
 
+#read-div-wrapper {
+    position: fixed;
+    bottom: 120px;
+    left: 30px;
+    z-index: 3;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .125); 
+}
+
 #repeat-div-wrapper {
     position: fixed;
     bottom: 120px;
@@ -434,10 +443,10 @@ textarea {
 
 }
 
-#words-count {
-	color: #ffffff;
-	font-size: 8px;
-	position: fixed;
+#words-count-container {
+    color: #ffffff;
+    font-size: 8px;
+    position: fixed;
     top: 24px;
     right: 8px;
 }

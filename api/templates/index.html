@@ -32,7 +32,8 @@
         </a>
     </nav>
     
-    
+	 <div class="loader" id="loader-element"></div>
+	 
     {% block content %}
         
     {% endblock content %}
@@ -48,6 +49,9 @@
 
 <script src="/static/js/scroll-up-button.js"></script>
 <script>
+	let loader = document.getElementById("loader-element");
+    loader.style.display = "block";
+	
     document.addEventListener('DOMContentLoaded', (event) => {
         const navTag = document.querySelector('.navTag');
         const flipText = document.querySelector('.flip-text svg');
@@ -61,6 +65,10 @@
             }
             isFlipped = !isFlipped;
         });
+    });
+	
+	window.addEventListener('load', (event) => {
+        loader.style.display = "none";
     });
 </script>
 

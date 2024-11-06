@@ -18,8 +18,7 @@ body{
     letter-spacing: 2px;
    
 }
-
-/* LOADER START */
+  /* LOADER START */
   .loader {
     border: 5px solid #f3f3f3;
     border-radius: 50%;
@@ -47,7 +46,7 @@ body{
     100% { transform: rotate(360deg); }
   }
   /* LOADER END */
-
+  
 .flip-text svg {
     transition: transform 1s;
     display: inline-block;
@@ -281,14 +280,13 @@ textarea {
     left: 30px;
     z-index: 3;
     cursor: pointer;
-    color: #212529; 
-    opacity: .7;
+    color: black; 
+    opacity: .125;
 }
 
-#read-div-wrapper:hover{
+#read-div-wrapper:hover, #info-div-wrapper:hover{
     opacity: 1;
 }
-
 
 #repeat-div-wrapper {
     position: fixed;
@@ -296,6 +294,51 @@ textarea {
     right: 30px;
     z-index: 3;
     font-size: 12px;  
+}
+
+#info-div-wrapper {
+    position: fixed;
+    bottom: 180px;
+    right: 30px;
+    z-index: 3;
+    opacity: .125;
+    cursor: pointer;
+}
+
+.definition-table td {
+    vertical-align:top;
+}
+#close-api-modal {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background-color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 5;
+    border: 2px solid rgba(0,0,0,.9);
+}
+
+#output-api-modal {
+    background-color: white;
+    position: absolute;
+    top: 20px;
+    border: 1px solid rgba(0,0,0,.9);
+    max-width: 600px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    z-index: 4;
+    padding: 4px 8px 8px 8px;
+    box-shadow: 5px 10px rgba(0,0,0,.125);
 }
 
 .arrow-down {
@@ -478,14 +521,6 @@ textarea {
 
 }
 
-#words-count-container {
-    color: #ffffff;
-    font-size: 8px;
-    position: fixed;
-    top: 24px;
-    right: 8px;
-}
-
 
 @media (max-width: 720px) {
     .centered-elements button{
@@ -499,7 +534,26 @@ textarea {
     .card-text {
         text-align: justify;
     }
+
+    #output-api-modal {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
   }
+
+  #words-count-container {
+    color: #ffffff;
+    font-size: 8px;
+    position: fixed;
+    top: 24px;
+    right: 8px;
+}
 
 @media only screen and (max-width: 500px) {
     .welcome-container {
@@ -539,7 +593,7 @@ textarea {
     }
 
     .welcome-container .container {
-        border-left: 3px solid #212529;
+        border-left: 2px solid #212529;
     }
     
 }

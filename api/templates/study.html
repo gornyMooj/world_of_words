@@ -56,6 +56,24 @@
     </div>
 </div>
 
+<div id="output-api-modal" style="display: none;">
+    <!-- <div id="close-api-modal" onclick="closeModalDefinition()"></div> -->
+    <div id="close-api-modal" onclick="closeModalDefinition()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+        </svg>
+    </div>
+    <div id="output-api-word-definition" > 
+    </div>
+</div>
+
+<div id="info-div-wrapper" onclick="getInfoData()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+    </svg>
+</div>
+
 <div id="repeat-div-wrapper">
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -211,13 +229,99 @@
         updateCounter(length);
 
     });
-	
-	function speak() {
-        let activeText = words[marker]['term']
+
+    function speak() {
+        let activeText = words[marker]['term'];
         let utterance = new SpeechSynthesisUtterance(activeText);
-        window.speechSynthesis.cancel();  // cancel any ongoing speech
+        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utterance);
     };
+
+
+    function getInfoData() {
+            // here comes lader - show it up
+            let loader = document.getElementById("loader-element");
+            loader.style.display = "block";
+
+            // here comes js code with the API request 
+            let activeText = words[marker]['term']
+            fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + activeText)
+                
+                .then(response => response.json())
+                .then(data => {
+                    // populating modal
+                    const wordDetails = document.getElementById("output-api-word-definition");
+                    let htmlCode = `<br><b>${data[0].word}</b>&emsp;${data[0].phonetic}
+                            <hr>
+                            <table class='definition-table'>
+                            `
+                    data[0].meanings.forEach(m => {
+                        let definitions = ``
+                        m.definitions.forEach(function (d, i) {
+                            definitions += `${d.definition} <br><br>`
+                        });
+                        let m_data = `<tr>
+                        <td style="font-weight: 600;">
+                                ${m.partOfSpeech}:&emsp;
+                            </td>
+                            <td>
+                                ${definitions} 
+                            </td>
+                        </tr>
+                            `
+                        if (m.synonyms.length > 0) {
+                            let synonyms = ``;
+                            m.synonyms.forEach(s => {
+                                synonyms += `${s}; `
+                            });
+                            m_data += `<td>
+                                    synonyms:&emsp;
+                                </td>
+                                <td>
+                                    ${synonyms} 
+                                </td>
+                            </tr>`};
+
+                        if (m.antonyms.length > 0) {
+                            let antonyms = ``;
+                            m.antonyms.forEach(a => {
+                                antonyms += `${a}; `
+                            });
+                            m_data += `<td>
+                                    antonyms:&emsp;
+                                </td>
+                                <td>
+                                    ${antonyms} 
+                                </td>
+                            </tr>`};
+
+
+
+                        htmlCode += m_data
+                    }); 
+                    
+                    htmlCode += `
+                    </table>
+                    `
+                    wordDetails.innerHTML = htmlCode;
+
+                    // show modal
+                    document.getElementById("output-api-modal").style.display = "block";
+
+                })
+                .catch(error => {
+                    alert("Unable to get data.");
+                    console.error(error);
+                    
+                });
+
+            // hide loader
+            loader.style.display = "none";   
+        };
+
+        function closeModalDefinition() {
+            document.getElementById("output-api-modal").style.display = "none";
+        }
     
 
 

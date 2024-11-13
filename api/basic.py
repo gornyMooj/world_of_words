@@ -6,6 +6,7 @@ from functools import wraps
 import datetime
 from flask_cors import CORS
 
+from urllib.parse import unquote
 from bson.json_util import dumps
 
 
@@ -104,6 +105,20 @@ def home():
     return render_template('home.html', decks = number_deck, without_decks=without_decks)
 
 
+def clean_words(words):
+    # converting _id to string & cleaning the data
+    updated_words = list()
+    for word in words:
+        data = {
+            '_id': str(word['_id']),
+            'term': word['term'],
+            'definition': word['definition'],
+            'to_be_repeted': word['to_be_repeted'],
+            'added': word['added']
+        }
+        updated_words.append(data)
+    return updated_words
+
 
 @app.route('/deck-menu/<id>')
 @login_required
@@ -111,7 +126,8 @@ def deck_menu(id):
     user_id = session['user']['_id']
     deck = db.decks.find_one({"_id": ObjectId(id)})
     words = db[user_id].find({"decks": id})
-
+    words = clean_words(words)
+    
     return render_template('deck-menu.html', words=words, deck=deck)
 
 
@@ -300,7 +316,7 @@ def upload_data(deck_id, deck_name ):
 
             return redirect(url_for('deck_menu',id=deck_id))
     
-    return render_template('uploader.html', deck_id=deck_id, deck_name=deck_name)
+    return render_template('uploader.html', deck_id=deck_id, deck_name=unquote(deck_name))
 
 
 @app.errorhandler(400)
@@ -314,21 +330,6 @@ def error_handler(error):
     error_code = getattr(error, 'code', 500)
     
     return render_template('error.html', error_code=error_code), error_code
-
-
-def clean_words(words):
-    # converting _id to string & cleaning the data
-    updated_words = list()
-    for word in words:
-        data = {
-            '_id': str(word['_id']),
-            'term': word['term'],
-            'definition': word['definition'],
-            'to_be_repeted': word['to_be_repeted'],
-            'added': word['added']
-        }
-        updated_words.append(data)
-    return updated_words
 
 
 def sort_words(updated_words, term_definition, sort,repeat, first ):

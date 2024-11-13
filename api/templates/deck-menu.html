@@ -16,6 +16,11 @@
                     UPLOAD CSV FILE
                 </button>
             </a>
+            <a class="centered-elements" href="#" onclick="exportToCSV()">
+                <button type="submit" class="btn secondary button-svg">
+                    EXPORT TO CSV
+                </button>
+            </a>
             <a class="centered-elements" href="{{ url_for('study', deck_id=deck['_id']) }}">
                 <button type="submit" class="btn secondary button-svg">
                     STUDY
@@ -76,4 +81,36 @@
               class="input-submit"
               style="margin-right: 10px;"/>
 	</form>
+
+    <script>
+        var words = JSON.parse('{{ words|tojson|safe }}');
+        
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Term,Definition,To Be Repeated,Added\n";
+
+            words.forEach(word => {
+
+                const dateObj = new Date(word.added);
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');  // Months are zero-based
+                const year = dateObj.getFullYear();
+                const formattedDate = `${day}/${month}/${year}`;
+                let row = `${word.term.replace(/[,;]/g, ' | ')};${word.definition.replace(/[,;]/g, ' | ')};${word.to_be_repeted};${formattedDate}`;
+                csvContent += row + "\n";  // Add row and new line
+            });
+
+            console.log(csvContent)
+
+            // download link and initiates download
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "words.csv");
+            document.body.appendChild(link);
+
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 {% endblock content %}

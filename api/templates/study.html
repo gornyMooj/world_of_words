@@ -343,6 +343,7 @@
         let targetElement = document.getElementById("flipCard");
         targetElement.addEventListener("touchstart", function(event) {
             startX = event.touches[0].clientX; // starts at X position
+			endX = event.touches[0].clientX; // endX on the start is the same as startX
         }, { passive: true });
         // updates the end X position when moving a finger
         targetElement.addEventListener("touchmove", function(event) {
